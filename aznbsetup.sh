@@ -1,4 +1,3 @@
-#!/bin/bash
 # Setup environment for Azure Notebooks
 # Steps:
 #    - Download, install and setup the latest version of Miniconda
