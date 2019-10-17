@@ -2,7 +2,6 @@
 # Steps:
 #    - Download, install and setup the latest version of Miniconda
 #    - Create a new conda environment 'snakemake-workshop' with everything required for the workshop
-#    - Activate the environment 'snakemake-workshop'
 
 # Path to miniconda installation
 CONDA_PATH=~/miniconda
@@ -25,5 +24,3 @@ conda update conda -y
 # Create workshop environment
 conda env create -f library/workshop.yaml
 
-# Activate workshop environment
-conda activate workshop
