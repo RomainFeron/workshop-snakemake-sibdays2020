@@ -20,4 +20,4 @@ eval "$("$CONDA_PATH"/bin/conda shell.bash hook)"
 conda update conda -y
 
 # Create workshop environment
-conda env create -f library/workshop.yaml -y
+conda env create -f library/workshop.yaml
