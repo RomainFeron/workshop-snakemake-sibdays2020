@@ -16,8 +16,14 @@ sh Miniconda3-latest-Linux-x86_64.sh -b -p "$CONDA_PATH"
 # Setup miniconda for current shell and activate base environment
 eval "$("$CONDA_PATH"/bin/conda shell.bash hook)"
 
+# Setup conda in shell permanently
+conda init
+
 # Update conda
 conda update conda -y
 
 # Create workshop environment
 conda env create -f library/workshop.yaml
+
+# Activate workshop environment
+conda activate workshop
