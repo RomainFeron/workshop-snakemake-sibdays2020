@@ -1,4 +1,4 @@
-name: workshop
+name: snakemake-workshop
 channels:
     - conda-forge
     - bioconda
