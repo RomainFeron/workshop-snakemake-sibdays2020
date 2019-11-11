@@ -78,5 +78,5 @@ rule parse_bcftools:
     output:
         'results/variants.tsv'
     script:
-        'bcftools_dic.py'
+        'create_substitution_table.py'
 
