@@ -1,11 +1,4 @@
-# rule bwa_idx:
-#     input:
-#         'data/genome.fa'
-#     output:
-#         'data/genome.fa.bwt'
-#     shell:
-#         'bwa index {input}'
-
+# Rule implemented after the first question
 # rule bwa_mapA:
 #    input:
 #         rules.bwa_idx.output,
@@ -40,4 +33,5 @@ rule samtools_idx:
     shell:
         'samtools index {input}'
 
+# Command to execute to visualize the BAM
 # snakemake --dag results/A.sorted.bam.bai results/B.sorted.bam.bai | dot -Tpng > dag.png
