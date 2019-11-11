@@ -1,0 +1,13 @@
+configfile: 'config.yaml'
+
+def get_sample_path(wildcards):
+    return config['samples'][wildcards.sample]
+
+# include: 'raw.smk'
+# include: 'results.smk'
+include: 'raw_w.smk'
+include: 'results_w.smk'
+
+rule all:
+    input:
+        'results/variants.tsv'
