@@ -1,12 +1,12 @@
 configfile: 'config.yaml'
 
-def get_sample_path(wildcards):
-    return config['samples'][wildcards.sample]
+# Version without wrappers
+# include: 'alignment.smk'
+# include: 'variants.smk'
 
-# include: 'raw.smk'
-# include: 'results.smk'
-include: 'raw_w.smk'
-include: 'results_w.smk'
+# Version with wrappers
+include: 'alignment_wrappers.smk'
+include: 'variants_wrappers.smk'
 
 rule all:
     input:

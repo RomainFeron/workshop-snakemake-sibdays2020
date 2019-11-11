@@ -11,8 +11,15 @@ rule bcftools:
         'logs/bcftools.log'
     benchmark:
         'benchmarks/bcftools.txt'
-    wrapper:
-        'v0.41.0/bio/bcftools/call',
-        'v0.41.0/bio/samtools/mpileup'
+    conda:
+        '../envs/variants.yaml'
     shell:
         'bcftools mpileup -f {input.genome} {input.aln} | bcftools call -P {params.subrate} -mv - > {output} 2>{log}'
+
+rule parse_bcftools:
+    input:
+        rules.bcftools.output
+    output:
+        'results/variants.tsv'
+    script:
+        'create_substitution_table.py'

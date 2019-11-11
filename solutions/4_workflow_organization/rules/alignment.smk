@@ -1,3 +1,7 @@
+def get_sample_path(wildcards):
+    return config['samples'][wildcards.sample]
+
+
 rule bwa_map_gen:
     input:
         config['genome_in'],
@@ -10,9 +14,8 @@ rule bwa_map_gen:
         'logs/{sample}_bwa_map.log'
     benchmark:
         'benchmarks/{sample}_bwa_map.txt'
-    wrapper:
-        'v0.41.0/bio/samtools/view',
-        'v0.41.0/bio/bwa/mem'
+    conda:
+        '../envs/alignment.yaml'
     shell:
         'bwa mem -t {threads} {input} | samtools view -b > {output} 2>{log}'
 
@@ -25,8 +28,8 @@ rule sort_bam:
         'logs/{sample}_sort.log'
     benchmark:
         'benchmarks/{sample}_sort.txt'
-    wrapper:
-        'v0.41.0/bio/samtools/sort'
+    conda:
+        '../envs/alignment.yaml'
     shell:
         'samtools sort -O bam {input} > {output} 2>{log}'
 
@@ -39,7 +42,7 @@ rule samtools_idx:
         'logs/{sample}_samtools_idx.log'
     benchmark:
         'benchmarks/{sample}_samtools_idx.txt'
-    wrapper:
-        'v0.41.0/bio/samtools/index'
+    conda:
+        '../envs/alignment.yaml'
     shell:
         'samtools index {input} 2>{log}'

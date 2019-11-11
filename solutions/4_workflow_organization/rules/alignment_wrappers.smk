@@ -1,6 +1,5 @@
 rule bwa_map_gen:
     input:
-        config['genome_in'],
         get_sample_path
     output:
         temp('results/{sample}.bam')
@@ -10,10 +9,10 @@ rule bwa_map_gen:
         'logs/{sample}_bwa_map.log'
     benchmark:
         'benchmarks/{sample}_bwa_map.txt'
-    conda:
-        'raw.yaml'
-    shell:
-        'bwa mem -t {threads} {input} | samtools view -b > {output} 2>{log}'
+    params:
+        index=config['genome_in']
+    wrapper:
+        'v0.41.0/bio/bwa/mem'
 
 rule sort_bam:
     input:
@@ -24,10 +23,8 @@ rule sort_bam:
         'logs/{sample}_sort.log'
     benchmark:
         'benchmarks/{sample}_sort.txt'
-    conda:
-        'raw.yaml'
-    shell:
-        'samtools sort -O bam {input} > {output} 2>{log}'
+    wrapper:
+        'v0.41.0/bio/samtools/sort'
 
 rule samtools_idx:
     input:
@@ -38,7 +35,5 @@ rule samtools_idx:
         'logs/{sample}_samtools_idx.log'
     benchmark:
         'benchmarks/{sample}_samtools_idx.txt'
-    conda:
-        'raw.yaml'
-    shell:
-        'samtools index {input} 2>{log}'
+    wrapper:
+        'v0.41.0/bio/samtools/index'
