@@ -29,6 +29,7 @@ rule samtools_idx:
     shell:
         'samtools index {input}'
 
+# Implementation of bcftools rules before adding the parameter
 # rule bcftools:
 #     input:
 #         genome = 'data/genome.fa',
@@ -55,6 +56,6 @@ rule parse_bcftools:
     input:
         rules.bcftools.output
     output:
-        'results/variants.tsv'
+        'results/substitution_table.tsv'
     script:
-        'bcftools_dic.py'
+        'create_substitution_table.py'
