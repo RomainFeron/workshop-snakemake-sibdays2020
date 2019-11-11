@@ -1,0 +1,60 @@
+samples = ['A', 'B']
+
+rule all:
+    input:
+        'results/variants.tsv'
+
+rule bwa_map_gen:
+    input:
+        'data/genome.fa',
+        'data/samples/{sample}.fastq'
+    output:
+        'results/{sample}.bam'
+    shell:
+        'bwa mem {input} | samtools view -b > {output} '
+
+rule sort_bam:
+    input:
+        rules.bwa_map_gen.output
+    output:
+        'results/{sample}.sorted.bam'
+    shell:
+        'samtools sort -O bam {input} > {output}'
+
+rule samtools_idx:
+    input:
+        rules.sort_bam.output
+    output:
+        'results/{sample}.sorted.bam.bai'
+    shell:
+        'samtools index {input}'
+
+# rule bcftools:
+#     input:
+#         genome = 'data/genome.fa',
+#         aln_idx = expand('results/{sample}.sorted.bam.bai', sample=samples),
+#         aln = expand('results/{sample}.sorted.bam', sample=samples)
+#     output:
+#         'results/variants.vcf'
+#     shell:
+#         'bcftools mpileup -f {input.genome} {input.aln} | bcftools call -mv - > {output}'
+
+rule bcftools:
+    input:
+        genome = 'data/genome.fa',
+        aln_idx = expand('results/{sample}.sorted.bam.bai', sample=samples),
+        aln = expand('results/{sample}.sorted.bam', sample=samples)
+    output:
+        'results/variants.vcf'
+    params:
+        subrate = 0.001
+    shell:
+        'bcftools mpileup -f {input.genome} {input.aln} | bcftools call -P {params.subrate} -mv - > {output}'
+
+rule parse_bcftools:
+    input:
+        rules.bcftools.output
+    output:
+        'results/variants.tsv'
+    script:
+        'bcftools_dic.py'
