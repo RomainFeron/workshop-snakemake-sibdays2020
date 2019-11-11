@@ -156,14 +156,41 @@ Fill the form:
 
 ![](docs/img/azure_repo_config.png)
 
-Click "import"; the project will now appear in the list, with the name you chose.
+Click "import"; the project will now appear in the list, with the name you chose. After the import process is complete, start a free compute instance for the project by clicking the `Terminal` button:
 
-**The notebook will be initialized with a script that setup the workshop's environment (aznbsetup.sh). This process can take up to 30 minutes to complete.**
+![](docs/img/azure_terminal.png)
+
+A standard terminal with bash shell will be launched in a new browser tab. A message warning you that the container is being prepared should pop up, you can click "OK".
+
+**The instance will be initialized with a script that setup the workshop's environment (aznbsetup.sh). This process can take up to 30 minutes to complete.**
+**Instances are reset after 1 hour of inactivity. If you plan to run the workshop from an Azure Notebook instance, please start the instance at the very beginning of the workshop or even a bit before if you can, so that you can start the first exercises session on time !**
+
+To verify that the setup process is complete, check the end of the relevant log file with the command `tail .nb.setup.log`. If the setup process is complete, you should see the following text:
+
+```
+# To activate this environment, use
+#
+#     $ conda activate snakemake-workshop
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+```
+
+If another message is displayed, the setup process has not been completed yet; you can start creating and editing files but you won't be able to run Snakemake yet.
+
+After the setup process is completed, update your bash environment with the command `source .bashrc`. Then, test your setup by activating the workshop's conda environment with the command `conda activate snakemake-workshop`.
 
 ### Creating and editing files
 
-TODO
+You can create a new file from the project's main page (https://notebooks.azure.com/<your_account_name>/projects/snakemake-workshop) by clicking the `+New` button and selecting `Blank File`:
+
+![](docs/img/azure_new_file.png)
+
+You can then edit this file directly from the web interface by selecting it and clicking the `Edit` button on the file's preview page.
+
+Alternatively, you can create and edit files locally using your preferred text editor and upload them to the project using the `Upload` button next to the `+New` button.
 
 ### Running Snakemake
 
-TODO
+Start a terminal and activate the workshop's conda environment as described in the Setup section, then navigate to the proper directory and simply run `snakemake`.
