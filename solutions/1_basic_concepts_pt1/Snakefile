@@ -1,0 +1,43 @@
+# rule bwa_idx:
+#     input:
+#         'data/genome.fa'
+#     output:
+#         'data/genome.fa.bwt'
+#     shell:
+#         'bwa index {input}'
+
+# rule bwa_mapA:
+#    input:
+#         rules.bwa_idx.output,
+#         'data/A.fastq'
+#     output:
+#         'results/A.bam'
+#     shell:
+#         'bwa mem {input} | samtools view -b > {output}'
+
+rule bwa_map_gen:
+    input:
+        'data/genome.fa',
+        'data/samples/{sample}.fastq'
+    output:
+        'results/{sample}.bam'
+    shell:
+        'bwa mem {input} | samtools view -b > {output} '
+
+rule sort_bam:
+    input:
+        rules.bwa_map_gen.output
+    output:
+        'results/{sample}.sorted.bam'
+    shell:
+        'samtools sort -O bam {input} > {output}'
+
+rule samtools_idx:
+    input:
+        rules.sort_bam.output
+    output:
+        'results/{sample}.sorted.bam.bai'
+    shell:
+        'samtools index {input}'
+
+# snakemake --dag results/A.sorted.bam.bai results/B.sorted.bam.bai | dot -Tpng > dag.png
