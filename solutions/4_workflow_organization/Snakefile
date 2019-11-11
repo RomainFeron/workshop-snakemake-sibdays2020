@@ -1,12 +1,12 @@
 configfile: 'config.yaml'
 
 # Version without wrappers
-# include: 'alignment.smk'
-# include: 'variants.smk'
+# include: 'rules/alignment.smk'
+# include: 'rules/variants.smk'
 
 # Version with wrappers
-include: 'alignment_wrappers.smk'
-include: 'variants_wrappers.smk'
+include: 'rules/alignment_wrappers.smk'
+include: 'rules/variants_wrappers.smk'
 
 rule all:
     input:

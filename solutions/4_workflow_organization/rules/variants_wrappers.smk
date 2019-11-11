@@ -20,4 +20,4 @@ rule parse_bcftools:
     output:
         'results/variants.tsv'
     script:
-        'create_substitution_table.py'
+        '../scripts/create_substitution_table.py'
