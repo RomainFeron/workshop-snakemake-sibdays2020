@@ -4,6 +4,16 @@ rule all:
     input:
         'results/variants.tsv'
 
+# Rule implemented after the first question
+# rule bwa_mapA:
+#    input:
+#         rules.bwa_idx.output,
+#         'data/A.fastq'
+#     output:
+#         'results/A.bam'
+#     shell:
+#         'bwa mem {input} | samtools view -b > {output}'
+
 rule bwa_map_gen:
     input:
         'data/genome.fa',
@@ -59,3 +69,6 @@ rule parse_bcftools:
         'results/substitution_table.tsv'
     script:
         'create_substitution_table.py'
+
+# Command to execute to visualize the BAM
+# snakemake --dag results/substitution_table.tsv | dot -Tpng > dag.png
