@@ -121,7 +121,7 @@ This step is not part of the setup process, but if you want to use Snakemake by 
 
 ```bash
 # Create a new empty environment called "snakemake-env"
-conda env create --name snakemake-env
+conda create --name snakemake-env
 # Activate the environment "snakemake-env"
 conda activate snakemake-env
 # Install snakemake from the Bioconda channel (conda-forge contains dependencies)
