@@ -1,15 +1,15 @@
 # Snakemake for reproducible analyses
 
-This repository is used as a base for the workshop "Snakemake for reproducible analyses" by Amina Echchiki and Romain Feron. It contains:
+This repository is used as a base for the virtual workshop "Snakemake for reproducible analyses" organized at SIB-days 2020. It is a short version of the [original workshop](https://github.com/RomainFeron/workshop-snakemake-pypharma2019) organized at PyPharma 2019. It contains:
 
 - A setup script for Azure Notebooks
 - A conda environment with all the dependencies required during the workshop
 - Properly implemented solutions for all exercises
 - A 'workflow' directory in which participants will implement the exercises, which contains sample data
 
-The structure of the workshop loosely follows that of the official [Snakemake tutorial](https://snakemake.readthedocs.io/en/v5.6.0/tutorial/tutorial.html), with a few modifications.
+The structure of the workshop loosely follows that of the official [Snakemake tutorial](https://snakemake.readthedocs.io/en/v5.7.4/tutorial/tutorial.html), with a few modifications.
 
-All the exercises and material required to complete them are available on the repository's [wiki](https://github.com/RomainFeron/snakemake_workshop/wiki).
+All the exercises and material required to complete them are available on the repository's [wiki](https://github.com/RomainFeron/workshop-snakemake-sibdays2020/wiki).
 
 To complete the workshop's exercises, you have two choices:
 
