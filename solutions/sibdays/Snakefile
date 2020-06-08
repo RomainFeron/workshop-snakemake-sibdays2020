@@ -1,0 +1,8 @@
+configfile: 'config.yaml'
+
+include: 'rules/alignment.smk'
+include: 'rules/variants.smk'
+
+rule all:
+    input:
+        'results/variants.tsv'

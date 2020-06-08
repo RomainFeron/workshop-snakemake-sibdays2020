@@ -1,0 +1,8 @@
+genome_in: data/genome.fa
+thread_bwa: 1
+subrate_bcftools: 0.001
+
+samples:
+    A: data/samples/A.fastq
+    B: data/samples/B.fastq
+    C: data/samples/C.fastq
